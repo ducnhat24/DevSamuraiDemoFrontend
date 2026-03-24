@@ -1,11 +1,12 @@
 import { Moon, Command } from "lucide-react"
+import type { SVGProps } from "react"
 
 export const Icons = {
     logo: Command,
 
     moon: Moon,
 
-    google: (props: any) => (
+    google: (props: SVGProps<SVGSVGElement>) => (
         <svg role="img" viewBox="0 0 24 24" {...props}>
             <path
                 fill="currentColor"

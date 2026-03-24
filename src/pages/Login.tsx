@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '@/store/hooks'
 import { setCredentials } from '@/store/authSlice'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Mail, Lock, Eye, EyeOff, User } from 'lucide-react'
 import { useTheme } from "@/components/theme-provider"
@@ -23,6 +23,10 @@ const loginSchema = z.object({
     email: z.string().email({ message: 'Email không đúng định dạng' }),
     password: z.string().min(1, { message: 'Vui lòng nhập mật khẩu' }),
 })
+
+type RegisterFormData = z.infer<typeof registerSchema>
+type LoginFormData = z.infer<typeof loginSchema>
+type AuthFormData = RegisterFormData | LoginFormData
 
 function PasswordEyeAddon({ showPassword, onToggle }: {
     showPassword: boolean
@@ -167,13 +171,14 @@ export default function Login() {
         defaultValues: { email: '', password: '' },
     })
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: AuthFormData) => {
         try {
             if (authMode === 'login') {
+                const loginData = data as LoginFormData
                 // 1. Gọi API Đăng nhập
                 const response = await axiosInstance.post('/auth/login', {
-                    email: data.email,
-                    password: data.password,
+                    email: loginData.email,
+                    password: loginData.password,
                 });
 
                 // 2. Lấy data từ Backend trả về (Tùy theo cấu trúc JSON của ông, tui đang ví dụ là response.data có chứa accessToken và user)
@@ -185,19 +190,24 @@ export default function Login() {
                 // 4. Chuyển hướng sang Dashboard
                 navigate('/dashboard');
             } else {
+                const registerData = data as RegisterFormData
                 // Chỗ này mốt ông gọi API Đăng ký nha
-                const response = await axiosInstance.post('/auth/signup', {
-                    name: data.name,
-                    email: data.email,
-                    password: data.password,
+                await axiosInstance.post('/auth/signup', {
+                    name: registerData.name,
+                    email: registerData.email,
+                    password: registerData.password,
                 });
                 alert("Đăng ký thành công! Vui lòng đăng nhập.");
                 toggleAuthMode();
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             // Báo lỗi nếu sai email/mật khẩu
             console.error("Lỗi API:", error);
-            alert(error.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại!");
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data?.message || "Có lỗi xảy ra, vui lòng thử lại!");
+                return;
+            }
+            alert("Có lỗi xảy ra, vui lòng thử lại!");
         }
     }
 

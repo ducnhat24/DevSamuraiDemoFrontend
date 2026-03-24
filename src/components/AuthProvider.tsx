@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { axiosInstance } from "@/lib/axios";
-import { updateUser, logout } from "@/store/authSlice";
+import { updateUser } from "@/store/authSlice";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const dispatch = useAppDispatch();

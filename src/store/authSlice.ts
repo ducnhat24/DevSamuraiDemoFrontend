@@ -1,7 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+type User = {
+    id: string;
+    email: string;
+    name: string;
+};
+
 interface AuthState {
-    user: { id: string; email: string; name: string } | null;
+    user: User | null;
     accessToken: string | null;
     refreshToken: string | null; // THÊM CÁI NÀY
 }
@@ -19,7 +25,7 @@ const authSlice = createSlice({
         setCredentials: (
             state,
             // Bổ sung thêm refreshToken vào payload
-            action: PayloadAction<{ user: any; accessToken: string; refreshToken: string }>
+            action: PayloadAction<{ user: User | null; accessToken: string; refreshToken: string }>
         ) => {
             state.user = action.payload.user;
             state.accessToken = action.payload.accessToken;
@@ -30,7 +36,7 @@ const authSlice = createSlice({
             state.accessToken = null;
             state.refreshToken = null; // Xóa sạch khi logout
         },
-        updateUser: (state, action: PayloadAction<any>) => {
+        updateUser: (state, action: PayloadAction<User>) => {
             state.user = action.payload;
         },
     },

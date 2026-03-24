@@ -1,10 +1,10 @@
 import { useState } from "react" // THÊM useState
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { AreaChart, Area, XAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar } from "recharts" // THÊM BarChart, Bar
-import { ChevronRight, TrendingUp } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 import { AppSidebar } from "@/components/AppSidebar"
 import { StatCard } from "@/components/StatCard"
