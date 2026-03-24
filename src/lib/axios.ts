@@ -3,7 +3,7 @@ import { store } from '@/store/store';
 import { setCredentials, logout } from '@/store/authSlice';
 
 export const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/',
     withCredentials: true, // RẤT QUAN TRỌNG: Để trình duyệt tự đính kèm Cookie chứa Refresh Token
     headers: {
         'Content-Type': 'application/json',
