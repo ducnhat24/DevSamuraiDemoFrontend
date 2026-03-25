@@ -253,6 +253,7 @@ export default function Login() {
                                                             </div>
                                                             <input
                                                                 type="email"
+                                                                data-testid="email-input"
                                                                 autoCapitalize="off"
                                                                 autoComplete="username"
                                                                 maxLength={255}
@@ -274,7 +275,7 @@ export default function Login() {
                                                 <FormItem className="group/field w-full data-[invalid=true]:text-destructive flex-col [&>*]:w-full [&>.sr-only]:w-auto grid gap-2">
                                                     <div className="flex flex-row items-center justify-between">
                                                         <FormLabel className="flex items-center gap-2 font-medium text-sm leading-none">Password</FormLabel>
-                                                        <a className="ml-auto inline-block text-sm underline" href="/auth/forgot-password">Forgot password?</a>
+                                                        <a tabIndex={-1} className="ml-auto inline-block text-sm underline" href="/auth/forgot-password">Forgot password?</a>
                                                     </div>
                                                     <FormControl>
                                                         <div className={inputGroupClass}>
@@ -284,6 +285,7 @@ export default function Login() {
                                                                 </span>
                                                             </div>
                                                             <input
+                                                                data-testid="password-input"
                                                                 type={showPassword ? 'text' : 'password'}
                                                                 autoCapitalize="off"
                                                                 autoComplete="current-password"
@@ -304,6 +306,7 @@ export default function Login() {
 
                                         <button
                                             type="submit"
+                                            data-testid="auth-submit-btn"
                                             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md cursor-pointer text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 w-full"
                                         >
                                             Sign in
@@ -330,7 +333,7 @@ export default function Login() {
 
                                 <div data-slot="card-footer" className="items-center px-6 flex justify-center gap-1 text-muted-foreground text-sm">
                                     <span>Don't have an account?</span>
-                                    <button type="button" onClick={toggleAuthMode} className="text-foreground underline">Sign up</button>
+                                    <button type="button" onClick={toggleAuthMode} data-testid="toggle-auth-mode-btn" className="text-foreground underline">Sign up</button>
                                 </div>
                             </Card>
                         </form>
@@ -364,6 +367,7 @@ export default function Login() {
                                                                 </div>
                                                                 <input
                                                                     type="text"
+                                                                    data-testid="name-input"
                                                                     autoComplete="name"
                                                                     maxLength={64}
                                                                     className={inputClass}
@@ -398,6 +402,7 @@ export default function Login() {
                                                                 maxLength={255}
                                                                 className={inputClass}
                                                                 {...field}
+                                                                data-testid="email-input"
                                                             />
                                                         </div>
                                                     </FormControl>
@@ -422,6 +427,7 @@ export default function Login() {
                                                             </div>
                                                             <input
                                                                 type={showPassword ? 'text' : 'password'}
+                                                                data-testid="password-btn"
                                                                 autoCapitalize="off"
                                                                 autoComplete="current-password"
                                                                 maxLength={72}
@@ -448,6 +454,7 @@ export default function Login() {
 
                                         <button
                                             type="submit"
+                                            data-testid="auth-submit-btn"
                                             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md cursor-pointer text-sm font-medium transition-all outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 w-full"
                                         >
                                             Create account
@@ -474,7 +481,7 @@ export default function Login() {
 
                                 <div data-slot="card-footer" className="items-center px-6 flex justify-center gap-1 text-muted-foreground text-sm">
                                     <span>Already have an account?</span>
-                                    <button type="button" onClick={toggleAuthMode} className="text-foreground underline">Sign in</button>
+                                    <button type="button" onClick={toggleAuthMode} data-testid="toggle-auth-mode-btn" className="text-foreground underline">Sign in</button>
                                 </div>
                             </Card>
                         </form>

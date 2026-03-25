@@ -37,7 +37,7 @@ export function AppSidebar() {
                                     </Avatar>
                                     {/* Thêm class tàng hình (hidden) khi collapse cho phần Text */}
                                     <div className="flex flex-col items-start gap-0.5 overflow-hidden text-left flex-1 group-data-[collapsible=icon]:hidden">
-                                        <span className="block w-full truncate font-semibold leading-none">
+                                        <span className="block w-full truncate font-semibold leading-tight">
                                             {user?.name || "User"} {/* Có tên thật thì hiện, không thì fallback */}
                                         </span>
                                     </div>
@@ -122,8 +122,8 @@ export function AppSidebar() {
                                     </Avatar>
                                     {/* Thêm class tàng hình (hidden) khi collapse cho phần Text */}
                                     <div className="flex w-full flex-col truncate text-left group-data-[collapsible=icon]:hidden">
-                                        <p className="truncate font-medium text-sm leading-none">{user?.name || 'Nhật Giang Đức'}</p>
-                                        <p className="text-slate-400 text-xs leading-none mt-1">{user?.email || 'ducnhaat@gmail.com'}</p>
+                                        <p className="truncate font-medium text-sm leading-tight">{user?.name || 'Nhật Giang Đức'}</p>
+                                        <p className="text-slate-400 text-xs leading-tight mt-1">{user?.email || 'ducnhaat@gmail.com'}</p>
                                     </div>
                                     {/* Thêm class tàng hình (hidden) khi collapse cho dấu 3 chấm */}
                                     <Ellipsis className="ml-auto size-4 text-slate-500 group-data-[collapsible=icon]:hidden" />

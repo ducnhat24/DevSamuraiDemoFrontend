@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# Acme Analytics Dashboard - Frontend Development Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, pixel-perfect, and responsive analytics dashboard built as a technical demonstration. This project focuses on high-quality UI/UX implementation, component-driven architecture, and seamless client-server integration within a tight 48-hour timeframe.
 
-Currently, two official plugins are available:
+## Live Demo & Repository
+- **Frontend Live (Vercel):** [https://dev-samurai-demo-frontend.vercel.app](https://dev-samurai-demo-frontend.vercel.app)
+- **Backend API (DigitalOcean):** [https://coral-app-gim35.ondigitalocean.app](https://coral-app-gim35.ondigitalocean.app)
+- **Backend Repository:** [https://github.com/ducnhat24/DevSamuraiDemoBackend](https://github.com/ducnhat24/DevSamuraiDemoBackend)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Screenshots
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Login / Signup View | Main Dashboard View |
+| :---: | :---: |
+| <img src="./screenshots/login.png" width="400" alt="Login View"/> | <img src="./screenshots/dashboard.png" width="400" alt="Dashboard View"/> |
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technology Stack
+- **Framework:** React + Vite (TypeScript)
+- **Styling:** Tailwind CSS v3
+- **UI Components:** Shadcn UI + Radix UI (Headless)
+- **State Management:** Redux Toolkit
+- **Routing:** React Router DOM v6
+- **Forms & Validation:** React Hook Form + Zod
+- **API Client:** Axios
+- **Charts:** Recharts
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Assumptions & Trade-offs
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Building a production-like application in a short timeframe requires strategic decision-making. Here are the key technical trade-offs made:
+
+1. **Redux Toolkit vs. TanStack Query (React Query):**
+   - *Trade-off:* While TanStack Query is the modern standard for server-state management, I opted for Redux Toolkit + Axios.
+   - *Reasoning:* Given the 48-hour sprint, Redux provided a stable, predictable global state for both authentication and user profiles without the overhead of restructuring the API layer. TanStack Query would be the primary candidate for future refactoring.
+2. **Test-Readiness vs. Full Test Coverage:**
+   - *Trade-off:* Due to time constraints, writing comprehensive Jest/React Testing Library suites was not feasible.
+   - *Reasoning:* Instead of skipping testing entirely, I prioritized "Test-Readiness" by strategically placing `data-testid` attributes on key interactive elements (buttons, inputs, dropdowns). This demonstrates a QA-friendly mindset and prepares the codebase for immediate automation testing.
+3. **Browser Support Assumption:**
+   - Assumed the target audience uses modern browsers supporting advanced CSS features like `svh` (Small Viewport Height) for accurate mobile layouts and CSS pseudo-classes (`:has`).
+
+---
+
+## Setup Instructions (Local Development)
+
+### 1. Prerequisites
+- Node.js (v18 or higher)
+- pnpm (Recommended)
+
+### 2. Installation
+Clone the repository and install dependencies:
+```bash
+git clone https://github.com/ducnhat24/devsamuraidemofrontend.git
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Environment Configuration
+Create a `.env` file in the root directory and add your backend API URL:
+```env
+VITE_API_URL=http://localhost:3000/api
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 4. Run the Development Server
+```bash
+pnpm dev
+```
+The application will be available at `http://localhost:5173`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 5. Build for Production
+```bash
+pnpm build
 ```
